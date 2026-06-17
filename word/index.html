@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일본어 단어 학습 | 히라가나 · 가타카나 · 한자</title>
+    <link rel="icon" href="../character/pochita_nobg.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+    <!-- ── Setup Screen ── -->
+    <div id="setup-screen" class="screen active">
+        <div class="setup-container">
+            <a href="../character/index.html" class="site-nav-btn">← 문자 연습</a>
+
+            <div class="logo">単語 → 뜻</div>
+            <h1>일본어 단어 학습</h1>
+            <p class="subtitle">히라가나·가타카나·한자 단어의 발음과 의미를 익히세요</p>
+
+            <div class="card settings-card">
+                <div class="setting-group">
+                    <label class="setting-label">단어 종류</label>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" data-category="hiragana">히라가나</button>
+                        <button class="toggle-btn" data-category="katakana">가타카나</button>
+                        <button class="toggle-btn" data-category="kanji">한자</button>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label">시험 모드</label>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" data-mode="reading">발음만</button>
+                        <button class="toggle-btn" data-mode="both">발음 + 의미</button>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label">출제 수 <span class="label-hint" id="count-hint"></span></label>
+                    <input type="number" id="test-count" min="1" value="10" placeholder="10">
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label">실시간 채점</label>
+                    <div class="toggle-group small-toggle">
+                        <button class="toggle-btn active" data-live="on">ON</button>
+                        <button class="toggle-btn" data-live="off">OFF</button>
+                    </div>
+                </div>
+            </div>
+
+            <button id="start-btn" class="btn primary large">시작하기 →</button>
+            <img src="../character/smart.png" alt="" class="deco-image">
+        </div>
+    </div>
+
+    <!-- ── Practice Screen ── -->
+    <div id="practice-screen" class="screen">
+        <div class="practice-header">
+            <button id="back-btn" class="btn ghost">← 설정</button>
+            <div class="practice-info">
+                <span id="practice-title" class="practice-title"></span>
+                <span id="word-count-label" class="char-count"></span>
+            </div>
+            <button id="check-btn" class="btn primary">채점하기</button>
+        </div>
+
+        <div id="words-list" class="words-list"></div>
+    </div>
+
+    <!-- ── Results Screen ── -->
+    <div id="results-screen" class="screen">
+        <div class="results-header">
+            <h2>결과</h2>
+            <div id="score-display" class="score-display"></div>
+        </div>
+
+        <div id="results-list" class="words-list"></div>
+
+        <div class="results-footer">
+            <button id="retry-btn" class="btn secondary">같은 시험 다시</button>
+            <button id="new-round-btn" class="btn primary">새 시험</button>
+        </div>
+    </div>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>

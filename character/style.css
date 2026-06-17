@@ -1,0 +1,428 @@
+/* ── Reset & Variables ─────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+    --primary:       #4f46e5;
+    --primary-hover: #4338ca;
+    --success:       #10b981;
+    --error:         #ef4444;
+    --active:        #3b82f6;
+    --bg:            #f5f4ff;
+    --surface:       #ffffff;
+    --text:          #1e1b4b;
+    --text-sub:      #6b7280;
+    --border:        #e5e7eb;
+    --shadow:        0 4px 20px rgba(79,70,229,0.08);
+    --r:             14px;
+}
+
+body {
+    font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+}
+
+.app {
+    width: 100%;
+    max-width: 960px;
+    padding: 24px 16px 48px;
+}
+
+/* ── Screens ───────────────────────────────────── */
+.screen { display: none; }
+.screen.active { display: block; }
+
+/* ── Cross-site navigation link ───────────────── */
+.site-nav-btn {
+    align-self: flex-start;
+    font-size: .85rem;
+    font-weight: 700;
+    color: var(--text-sub);
+    text-decoration: none;
+    padding: 6px 14px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: var(--surface);
+    transition: all .18s;
+}
+.site-nav-btn:hover { border-color: var(--primary); color: var(--primary); }
+
+/* ── Decorative image (setup page only) ────────── */
+.deco-image {
+    width: 600px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 8px 28px rgba(79,70,229,0.18));
+    animation: float 4s ease-in-out infinite;
+    margin-top: 8px;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0);    }
+    50%       { transform: translateY(-8px); }
+}
+
+/* ── Setup ─────────────────────────────────────── */
+.setup-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 48px 0 24px;
+    text-align: center;
+}
+
+.logo { font-size: 2.4rem; font-weight: 800; color: var(--primary); letter-spacing: .06em; }
+h1 { font-size: 2rem; font-weight: 800; }
+.subtitle { color: var(--text-sub); font-size: .95rem; }
+
+.card {
+    background: var(--surface);
+    border-radius: var(--r);
+    box-shadow: var(--shadow);
+    padding: 28px;
+    width: 100%;
+    max-width: 640px;
+}
+
+.settings-card { display: flex; flex-direction: column; gap: 24px; }
+.setting-group { display: flex; flex-direction: column; gap: 10px; }
+
+.setting-label {
+    font-size: .78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    color: var(--text-sub);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.label-hint {
+    font-size: .72rem;
+    font-weight: 500;
+    text-transform: none;
+    letter-spacing: 0;
+    color: var(--text-sub);
+    opacity: .75;
+}
+
+/* Full-width number input for test-count */
+#test-count { width: 100%; }
+
+.toggle-group {
+    display: flex;
+    gap: 6px;
+    background: var(--bg);
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.toggle-btn {
+    flex: 1;
+    padding: 10px 0;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-sub);
+    font-size: .88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .18s;
+}
+
+.toggle-btn.active {
+    background: var(--primary);
+    color: #fff;
+    box-shadow: 0 2px 8px rgba(79,70,229,.3);
+}
+
+.small-toggle { max-width: 140px; }
+
+/* Multi-select extra character buttons */
+.extra-group {
+    display: flex;
+    gap: 8px;
+}
+
+/* Sub-range that appears when an extra is enabled */
+.extra-range {
+    display: none;
+    flex-direction: column;
+    gap: 8px;
+    background: var(--bg);
+    border-radius: 8px;
+    padding: 10px 12px;
+}
+
+.extra-range.visible { display: flex; }
+
+.extra-range-label {
+    font-size: .75rem;
+    font-weight: 700;
+    color: var(--text-sub);
+}
+
+.extra-btn {
+    flex: 1;
+    padding: 10px 0;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-sub);
+    font-size: .88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .18s;
+    font-family: inherit;
+}
+
+.extra-btn.active {
+    border-color: var(--primary);
+    background: #eeefff;
+    color: var(--primary);
+}
+
+.range-group { display: flex; align-items: center; gap: 10px; }
+
+.range-input-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
+
+.range-label { font-size: .72rem; color: var(--text-sub); font-weight: 600; }
+
+input[type="number"] {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--text);
+    background: var(--bg);
+    outline: none;
+    transition: border-color .18s;
+    -moz-appearance: textfield;
+}
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; }
+input[type="number"]:focus { border-color: var(--primary); }
+
+.range-sep { font-size: 1.2rem; color: var(--text-sub); margin-top: 18px; }
+
+.range-info {
+    font-size: .83rem;
+    color: var(--text-sub);
+    text-align: center;
+    min-height: 18px;
+}
+
+/* ── Buttons ───────────────────────────────────── */
+.btn {
+    padding: 11px 22px;
+    border: none;
+    border-radius: 10px;
+    font-size: .92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all .18s;
+    font-family: inherit;
+}
+
+.btn.primary { background: var(--primary); color: #fff; }
+.btn.primary:hover {
+    background: var(--primary-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 14px rgba(79,70,229,.35);
+}
+
+.btn.secondary { background: var(--surface); color: var(--text); border: 2px solid var(--border); }
+.btn.secondary:hover { border-color: var(--primary); color: var(--primary); }
+
+.btn.ghost { background: transparent; color: var(--text-sub); }
+.btn.ghost:hover { background: var(--surface); color: var(--text); }
+
+.btn.large { padding: 15px 40px; font-size: 1rem; border-radius: 12px; }
+
+/* ── Practice Header ───────────────────────────── */
+.practice-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0 24px;
+}
+
+.practice-info { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.practice-title { font-weight: 700; font-size: .95rem; }
+.char-count { font-size: .78rem; color: var(--text-sub); }
+
+/* ── Characters Row ────────────────────────────── */
+.chars-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 32px;
+    justify-content: center;
+}
+
+/* ── Character Card (practice) ─────────────────── */
+.char-card {
+    background: var(--surface);
+    border-radius: 12px;
+    padding: 14px 8px 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    box-shadow: var(--shadow);
+    border: 2px solid transparent;
+    min-width: 72px;
+    transition: border-color .18s, background .18s, transform .12s;
+}
+
+/* States */
+.char-card.active {
+    border-color: var(--active);
+    background: #eff6ff;
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(59,130,246,.2);
+}
+
+.char-card.correct  { border-color: var(--success); background: #f0fdf4; }
+.char-card.incorrect { border-color: var(--error);   background: #fef2f2; }
+
+.japanese-char {
+    font-size: 2.2rem;
+    line-height: 1;
+    font-family: 'Yu Gothic', 'Meiryo', 'Hiragino Kaku Gothic Pro', serif;
+    user-select: none;
+}
+
+/* Yōon cards have 2-char strings — shrink slightly to fit */
+.char-card.compound .japanese-char { font-size: 1.5rem; }
+
+/* Typed character shown under the Japanese char */
+.typed-char {
+    font-size: .95rem;
+    font-weight: 700;
+    min-height: 1.2em;
+    color: var(--text-sub);
+}
+
+.char-card.correct  .typed-char { color: var(--success); }
+.char-card.incorrect .typed-char { color: var(--error); }
+.char-card.active .typed-char { color: var(--active); }
+
+/* Correct-answer hint shown on result cards only */
+.correct-answer {
+    font-size: .72rem;
+    color: var(--success);
+    font-weight: 700;
+    display: none;
+}
+.char-card.incorrect .correct-answer { display: block; }
+
+/* Read-only answer input in results screen */
+.char-input {
+    width: 100%;
+    padding: 6px 4px;
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text);
+    background: var(--bg);
+    outline: none;
+    font-family: inherit;
+}
+.char-input.correct-input   { border-color: var(--success); background: #f0fdf4; color: var(--success); }
+.char-input.incorrect-input { border-color: var(--error);   background: #fef2f2; color: var(--error); }
+
+/* ── Typing Area ───────────────────────────────── */
+.typing-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+}
+
+.typing-label {
+    font-size: .85rem;
+    color: var(--text-sub);
+    font-weight: 600;
+}
+
+.typing-input {
+    width: 100%;
+    max-width: 600px;
+    padding: 16px 20px;
+    border: 2px solid var(--border);
+    border-radius: 14px;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-align: center;
+    color: var(--text);
+    background: var(--surface);
+    outline: none;
+    transition: border-color .18s, box-shadow .18s;
+    font-family: 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    letter-spacing: .06em;
+    box-shadow: var(--shadow);
+}
+
+.typing-input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(79,70,229,.12);
+}
+
+/* ── Footers ───────────────────────────────────── */
+.practice-footer,
+.results-footer {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    padding: 8px 0 24px;
+}
+
+/* ── Results Screen ────────────────────────────── */
+.chars-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+    justify-content: center;
+}
+
+.results-header {
+    text-align: center;
+    padding: 28px 0 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+}
+
+.results-header h2 { font-size: 1.8rem; font-weight: 800; }
+.score-display { font-size: 1rem; color: var(--text-sub); }
+.score-display .score { font-size: 2.2rem; font-weight: 800; color: var(--primary); }
+
+/* ── Responsive ────────────────────────────────── */
+@media (max-width: 520px) {
+    h1 { font-size: 1.6rem; }
+    .japanese-char { font-size: 1.8rem; }
+    .char-card { min-width: 60px; padding: 12px 6px 8px; }
+    .typing-input { font-size: 1.2rem; }
+    .practice-header { padding: 4px 0 18px; }
+    .btn.ghost { padding: 8px 10px; font-size: .82rem; }
+}

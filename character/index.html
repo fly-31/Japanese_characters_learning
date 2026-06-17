@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일본어 문자 학습 | 히라가나 · 가타카나</title>
+    <link rel="icon" href="pochita_nobg.ico" type="image/x-icon">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+
+    <!-- ── Setup Screen ── -->
+    <div id="setup-screen" class="screen active">
+        <div class="setup-container">
+            <a href="../word/index.html" class="site-nav-btn">단어 연습 →</a>
+            <div class="logo">あ → 아</div>
+            <h1>일본어 문자 학습</h1>
+            <p class="subtitle">히라가나·가타카나의 한국어 발음을 익히세요</p>
+
+            <div class="card settings-card">
+                <div class="setting-group">
+                    <label class="setting-label">문자 종류</label>
+                    <div class="toggle-group">
+                        <button class="toggle-btn active" data-type="hiragana">히라가나</button>
+                        <button class="toggle-btn" data-type="katakana">가타카나</button>
+                        <button class="toggle-btn" data-type="both">둘 다</button>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label">범위 선택 (1 – 46)</label>
+                    <div class="range-group">
+                        <div class="range-input-wrap">
+                            <span class="range-label">시작</span>
+                            <input type="number" id="range-from" min="1" max="46" value="1">
+                        </div>
+                        <span class="range-sep">—</span>
+                        <div class="range-input-wrap">
+                            <span class="range-label">끝</span>
+                            <input type="number" id="range-to" min="1" max="46" value="20">
+                        </div>
+                    </div>
+                    <p class="range-info" id="range-preview"></p>
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label">추가 문자</label>
+                    <div class="extra-group">
+                        <button class="extra-btn" data-extra="dakuten">탁음 · 반탁음</button>
+                        <button class="extra-btn" data-extra="youon">요음</button>
+                    </div>
+                    <div class="extra-range" id="dakuten-range">
+                        <span class="extra-range-label">탁음 범위 <span class="label-hint">(1–25)</span></span>
+                        <div class="range-group">
+                            <div class="range-input-wrap">
+                                <span class="range-label">시작</span>
+                                <input type="number" id="dakuten-from" min="1" max="25" value="1">
+                            </div>
+                            <span class="range-sep">—</span>
+                            <div class="range-input-wrap">
+                                <span class="range-label">끝</span>
+                                <input type="number" id="dakuten-to" min="1" max="25" value="25">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="extra-range" id="youon-range">
+                        <span class="extra-range-label">요음 범위 <span class="label-hint">(1–33)</span></span>
+                        <div class="range-group">
+                            <div class="range-input-wrap">
+                                <span class="range-label">시작</span>
+                                <input type="number" id="youon-from" min="1" max="33" value="1">
+                            </div>
+                            <span class="range-sep">—</span>
+                            <div class="range-input-wrap">
+                                <span class="range-label">끝</span>
+                                <input type="number" id="youon-to" min="1" max="33" value="33">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label">출제 수 <span class="label-hint">(비우면 전체)</span></label>
+                    <input type="number" id="test-count" min="1" placeholder="전체">
+                </div>
+
+                <div class="setting-group">
+                    <label class="setting-label">실시간 채점</label>
+                    <div class="toggle-group small-toggle">
+                        <button class="toggle-btn active" data-live="on">ON</button>
+                        <button class="toggle-btn" data-live="off">OFF</button>
+                    </div>
+                </div>
+            </div>
+
+            <button id="start-btn" class="btn primary large">시작하기 →</button>
+            <img src="smart.png" alt="" class="deco-image">
+        </div>
+    </div>
+
+    <!-- ── Practice Screen ── -->
+    <div id="practice-screen" class="screen">
+        <div class="practice-header">
+            <button id="back-btn" class="btn ghost">← 설정</button>
+            <div class="practice-info">
+                <span id="practice-title" class="practice-title"></span>
+                <span id="char-count" class="char-count"></span>
+            </div>
+            <button id="reshuffle-btn" class="btn ghost">다시 섞기</button>
+        </div>
+
+        <div id="chars-row" class="chars-row"></div>
+
+        <div class="typing-area">
+            <p class="typing-label">위 순서대로 한국어 발음을 입력하세요</p>
+            <input
+                type="text"
+                id="typing-input"
+                class="typing-input"
+                placeholder="여기에 입력..."
+                autocomplete="off"
+                autocorrect="off"
+                autocapitalize="off"
+                spellcheck="false"
+            >
+        </div>
+
+        <div class="practice-footer">
+            <button id="check-btn" class="btn primary large">채점하기</button>
+        </div>
+    </div>
+
+    <!-- ── Results Screen ── -->
+    <div id="results-screen" class="screen">
+        <div class="results-header">
+            <h2>결과</h2>
+            <div id="score-display" class="score-display"></div>
+        </div>
+
+        <div id="results-grid" class="chars-grid"></div>
+
+        <div class="results-footer">
+            <button id="retry-btn" class="btn secondary">같은 시험 다시</button>
+            <button id="new-round-btn" class="btn primary">새 시험</button>
+        </div>
+    </div>
+
+</div>
+<script src="script.js"></script>
+</body>
+</html>
